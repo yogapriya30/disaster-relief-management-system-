@@ -1,7 +1,7 @@
 # Problem Statement
 
 ## 1. Project Title
-AI-Powered Disaster Relief Coordination and Resource Management System
+AI-Powered Disaster Relief Task Allocation and Resource Management System
 
 ---
 
