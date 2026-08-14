@@ -1,8 +1,12 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.database.base import Base
 
-DATABASE_URL = "postgresql://postgres:yoga%40123@localhost:5432/disaster_relief_db"
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 
