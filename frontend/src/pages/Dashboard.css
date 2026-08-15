@@ -46,6 +46,22 @@
 
 .dash-logout:hover { background: #334155; }
 
+.add-disaster-btn {
+  background: #22d3ee;
+  color: #0b1120;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 10px;
+  transition: 0.2s;
+}
+
+.add-disaster-btn:hover {
+  background: #67e8f9;
+}
+
 .hero {
   padding: 40px 40px 10px;
 }

@@ -1,0 +1,105 @@
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../assets/signup-bg.jpg") no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.login-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.login-brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #1a1a2e;
+}
+
+.logo-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #e63946;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.logo-accent {
+  color: #e63946;
+}
+
+.login-subtitle {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
+  margin-top: 15px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.login-error {
+  color: #e63946;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.login-success {
+  color: #2a9d8f;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-signup-link {
+  margin-top: 18px;
+  font-size: 13px;
+  text-align: center;
+  color: #555;
+}
