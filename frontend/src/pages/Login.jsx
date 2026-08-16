@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setLoading(true);
-    
-    // எந்தச் சரிபார்ப்பும் இல்லாமல் நேரடியாக உள்ளே செல்ல:
-    setTimeout(() => {
+    try {
+      const res = await axios.post(
+        "https://disaster-relief-management-system-bcio.onrender.com/users/login",
+        { email, password }
+      );
+      localStorage.setItem("token", res.data.access_token);
       navigate("/dashboard");
-    }, 500);
+    } catch (err) {
+      setError("Invalid email or password");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,6 +57,8 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
+          {error && <div className="login-error">⚠ {error}</div>}
 
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
