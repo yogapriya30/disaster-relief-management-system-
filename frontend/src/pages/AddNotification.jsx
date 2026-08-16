@@ -16,7 +16,7 @@ function AddNotification() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/notifications/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/notifications/", {
         message,
         recipient,
         user_id: Number(userId),

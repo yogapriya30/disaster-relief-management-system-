@@ -18,7 +18,7 @@ function AddVolunteer() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/volunteers/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/volunteers/", {
         name,
         phone,
         email,

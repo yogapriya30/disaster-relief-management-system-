@@ -17,7 +17,7 @@ function AddDisaster() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/disasters/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/disasters/", {
         title,
         location,
         status,

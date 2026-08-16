@@ -16,7 +16,7 @@ function AddTask() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/tasks/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/tasks/", {
         title,
         status,
         assigned_to: Number(assignedTo),

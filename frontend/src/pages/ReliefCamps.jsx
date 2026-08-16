@@ -17,7 +17,7 @@ function ReliefCamps() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/relief-camps/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/relief-camps/")
       .then((res) => setCamps(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -30,7 +30,7 @@ function ReliefCamps() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this relief camp?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/relief-camps/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/relief-camps/${id}`)
       .then(() => {
         setCamps((prev) => prev.filter((c) => c.id !== id));
       })

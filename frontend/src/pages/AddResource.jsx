@@ -17,7 +17,7 @@ function AddResource() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/resources/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/resources/", {
         name,
         quantity,
         unit,

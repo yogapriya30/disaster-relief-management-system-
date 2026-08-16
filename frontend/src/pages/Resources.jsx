@@ -17,7 +17,7 @@ function Resources() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/resources/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/resources/")
       .then((res) => setResources(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -30,7 +30,7 @@ function Resources() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this resource?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/resources/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/resources/${id}`)
       .then(() => {
         setResources((prev) => prev.filter((r) => r.id !== id));
       })

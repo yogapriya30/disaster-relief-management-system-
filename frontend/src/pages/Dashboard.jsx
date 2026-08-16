@@ -30,7 +30,7 @@ function Dashboard() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/disasters/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/disasters/")
       .then((res) => setDisasters(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -43,7 +43,7 @@ function Dashboard() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this disaster report?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/disasters/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/disasters/${id}`)
       .then(() => {
         setDisasters((prev) => prev.filter((d) => d.id !== id));
       })

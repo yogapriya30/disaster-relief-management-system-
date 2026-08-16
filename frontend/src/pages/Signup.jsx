@@ -18,7 +18,7 @@ function Signup() {
     setSuccess("");
     setLoading(true);
     try {
-      await axios.post("http://127.0.0.1:8000/users/", {
+      await axios.post("https://disaster-relief-management-system-bcio.onrender.com/users/", {
         name,
         email,
         password,

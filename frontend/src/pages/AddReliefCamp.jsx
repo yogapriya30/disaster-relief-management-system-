@@ -16,7 +16,7 @@ function AddReliefCamp() {
     setError("");
 
     axios
-      .post("http://127.0.0.1:8000/relief-camps/", {
+      .post("https://disaster-relief-management-system-bcio.onrender.com/relief-camps/", {
         name,
         location,
         capacity: Number(capacity),

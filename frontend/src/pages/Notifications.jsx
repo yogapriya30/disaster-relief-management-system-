@@ -17,7 +17,7 @@ function Notifications() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/notifications/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/notifications/")
       .then((res) => setNotifications(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -30,7 +30,7 @@ function Notifications() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this notification?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/notifications/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/notifications/${id}`)
       .then(() => {
         setNotifications((prev) => prev.filter((n) => n.id !== id));
       })

@@ -15,7 +15,7 @@ function Login() {
     setError("");
     setLoading(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/users/login", {
+      const res = await axios.post("https://disaster-relief-management-system-bcio.onrender.com/users/login", {
         email,
         password,
       });

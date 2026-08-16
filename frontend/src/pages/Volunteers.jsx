@@ -30,7 +30,7 @@ function Volunteers() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/volunteers/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/volunteers/")
       .then((res) => setVolunteers(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -43,7 +43,7 @@ function Volunteers() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this volunteer?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/volunteers/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/volunteers/${id}`)
       .then(() => {
         setVolunteers((prev) => prev.filter((v) => v.id !== id));
       })

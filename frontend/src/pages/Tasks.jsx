@@ -18,7 +18,7 @@ function Tasks() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/tasks/")
+      .get("https://disaster-relief-management-system-bcio.onrender.com/tasks/")
       .then((res) => setTasks(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
@@ -31,7 +31,7 @@ function Tasks() {
   const handleDelete = (id) => {
     if (!window.confirm("Delete this task?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/tasks/${id}`)
+      .delete(`https://disaster-relief-management-system-bcio.onrender.com/tasks/${id}`)
       .then(() => {
         setTasks((prev) => prev.filter((t) => t.id !== id));
       })
