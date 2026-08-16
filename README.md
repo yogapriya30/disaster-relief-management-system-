@@ -7,7 +7,8 @@
 
 ## 🔗 Live Demo & Video
 
-- **Live Demo:** _Coming at Review-II (Day 41)_
+- **Live Demo (Frontend):** [https://disaster-relief-management-system-eight.vercel.app/](https://disaster-relief-management-system-eight.vercel.app/)
+- **Backend API Docs (Swagger):** [https://disaster-relief-management-system-bcio.onrender.com/docs](https://disaster-relief-management-system-bcio.onrender.com/docs)
 - **Video Demo:** _Coming at Review-III (Day 60)_
 
 ---
@@ -23,6 +24,22 @@ During a disaster, coordinating volunteers, relief camps, and resources across m
 ![Architecture Diagram](docs/diagrams/architecture-diagram.png)
 
 _See `/docs/diagrams/` for the full-resolution source file._
+
+---
+
+## 🧩 Class Diagram
+
+![Class Diagram](docs/diagrams/class-diagram.png)
+
+The system follows a layered architecture:
+
+- **Controllers_Routers** — exposes User, Disaster, Resource, Volunteer, Relief Camp, Task, and Notification APIs
+- **Schemas** — validates request/response data (UserSchema, DisasterSchema, ResourceSchema, VolunteerSchema, ReliefCampSchema, TaskSchema, NotificationSchema)
+- **Services** — business logic layer (UserService, DisasterService, ResourceService, VolunteerService, ReliefCampService, TaskService, NotificationService)
+- **Models** — SQLAlchemy ORM models (User, Disaster, Resource, Volunteer, ReliefCamp, Task, Notification)
+- **Database** — PostgreSQL, where all model data is persisted
+
+_See `/docs/diagrams/` for the full-resolution source file (`Class_Diagram.drawio`)._
 
 ---
 
@@ -130,10 +147,9 @@ The backend runs at `http://localhost:8000` and the frontend at `http://localhos
 ## 📑 API Documentation
 
 Interactive Swagger docs available at:
-```
-http://localhost:8000/docs
-```
-_(Live link will be added after Day 41 deployment.)_
+
+- **Local:** `http://localhost:8000/docs`
+- **Live:** [https://disaster-relief-management-system-bcio.onrender.com/docs](https://disaster-relief-management-system-bcio.onrender.com/docs)
 
 ---
 
@@ -149,11 +165,10 @@ _(Test suite is being built in Weeks 4–5 of the project.)_
 
 ## ☁️ Deployment
 
-_To be completed by Day 41 (Review-II):_
-- Backend → Render/Railway
-- Frontend → Vercel/Netlify
-- Database → Railway/Clever Cloud/Aiven
-- CI/CD → GitHub Actions (auto build, test, deploy on push to `main`)
+- **Backend:** [Render](https://disaster-relief-management-system-bcio.onrender.com/)
+- **Frontend:** [Vercel](https://disaster-relief-management-system-eight.vercel.app/)
+- **Database:** Railway/Clever Cloud/Aiven (PostgreSQL)
+- **CI/CD:** GitHub Actions (auto build, test, deploy on push to `main`) — _in progress_
 
 ---
 
