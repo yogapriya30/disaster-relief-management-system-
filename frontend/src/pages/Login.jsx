@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     
-    // எந்தச் சரிபார்ப்பும் இல்லாமல் நேரடியாக உள்ளே செல்ல:
+
     setTimeout(() => {
       navigate("/dashboard");
     }, 500);
