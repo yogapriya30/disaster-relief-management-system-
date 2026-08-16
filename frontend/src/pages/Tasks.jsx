@@ -1,22 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Dashboard.css";
+import "./Tasks.css";
 
-const getIcon = (title = "") => {
-  const t = title.toLowerCase();
-
-  if (t.includes("flood")) return "🌊";
-  if (t.includes("fire")) return "🔥";
-  if (t.includes("earthquake")) return "🌍";
-  if (t.includes("cyclone") || t.includes("storm")) return "🌪️";
-  if (t.includes("landslide")) return "⛰️";
-
-  return "⚠️";
-};
-
-function Dashboard() {
-  const [disasters, setDisasters] = useState([]);
+function Tasks() {
+  const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
 
   const navigate = useNavigate();
@@ -30,8 +18,8 @@ function Dashboard() {
     }
 
     axios
-      .get("http://127.0.0.1:8000/disasters/")
-      .then((res) => setDisasters(res.data))
+      .get("http://127.0.0.1:8000/tasks/")
+      .then((res) => setTasks(res.data))
       .catch((err) => console.log(err));
   }, [navigate]);
 
@@ -41,23 +29,20 @@ function Dashboard() {
   };
 
   const handleDelete = (id) => {
-    if (!window.confirm("Delete this disaster report?")) return;
+    if (!window.confirm("Delete this task?")) return;
     axios
-      .delete(`http://127.0.0.1:8000/disasters/${id}`)
+      .delete(`http://127.0.0.1:8000/tasks/${id}`)
       .then(() => {
-        setDisasters((prev) => prev.filter((d) => d.id !== id));
+        setTasks((prev) => prev.filter((t) => t.id !== id));
       })
       .catch((err) => console.log(err));
   };
 
-  const activeCount = disasters.filter((d) => d.status === "active").length;
-
-  const resolvedCount = disasters.filter((d) => d.status !== "active").length;
+  const pendingCount = tasks.filter((t) => t.status === "pending").length;
+  const completedCount = tasks.filter((t) => t.status === "completed").length;
 
   const filtered =
-    filter === "all"
-      ? disasters
-      : disasters.filter((d) => d.status === filter);
+    filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
 
   return (
     <div className="dash">
@@ -70,9 +55,9 @@ function Dashboard() {
         <div>
           <button
             className="add-disaster-btn"
-            onClick={() => navigate("/add-disaster")}
+            onClick={() => navigate("/add-task")}
           >
-            + Add Disaster
+            + Add Task
           </button>
 
           <button className="dash-logout" onClick={handleLogout}>
@@ -82,89 +67,89 @@ function Dashboard() {
       </header>
 
       <section className="hero">
-        <h1>Situation Overview</h1>
-        <p>Live status of reported disasters across regions</p>
+        <h1>Tasks Overview</h1>
+        <p>All relief tasks and their progress</p>
       </section>
 
       <section className="metrics">
         <div className="metric-card glow-total">
-          <div className="metric-icon">📊</div>
+          <div className="metric-icon">📋</div>
           <div>
-            <div className="metric-value">{disasters.length}</div>
-            <div className="metric-label">Total Reports</div>
+            <div className="metric-value">{tasks.length}</div>
+            <div className="metric-label">Total Tasks</div>
           </div>
         </div>
 
         <div className="metric-card glow-active">
-          <div className="metric-icon">🚨</div>
+          <div className="metric-icon">⏳</div>
           <div>
-            <div className="metric-value">{activeCount}</div>
-            <div className="metric-label">Active Now</div>
+            <div className="metric-value">{pendingCount}</div>
+            <div className="metric-label">Pending</div>
           </div>
         </div>
 
         <div className="metric-card glow-resolved">
           <div className="metric-icon">✅</div>
           <div>
-            <div className="metric-value">{resolvedCount}</div>
-            <div className="metric-label">Resolved</div>
+            <div className="metric-value">{completedCount}</div>
+            <div className="metric-label">Completed</div>
           </div>
         </div>
       </section>
 
       <section className="filter-row">
-        {["all", "active", "resolved"].map((f) => (
+        {["all", "pending", "in_progress", "completed"].map((f) => (
           <button
             key={f}
             className={`filter-chip ${filter === f ? "chip-active" : ""}`}
             onClick={() => setFilter(f)}
           >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
+            {f.charAt(0).toUpperCase() + f.slice(1).replace("_", " ")}
           </button>
         ))}
       </section>
 
       <section className="timeline">
-        {filtered.map((d, i) => (
+        {filtered.map((t, i) => (
           <div
             className="timeline-item"
-            key={d.id}
+            key={t.id}
             style={{ animationDelay: `${i * 0.06}s` }}
           >
             <div
               className={`timeline-dot ${
-                d.status === "active" ? "dot-active" : "dot-resolved"
+                t.status === "completed" ? "dot-resolved" : "dot-active"
               }`}
             />
 
             <div className="timeline-card">
               <div className="tl-top">
-                <span className="tl-icon">{getIcon(d.title)}</span>
-
-                <span className="tl-title">{d.title}</span>
-
+                <span className="tl-icon">📋</span>
+                <span className="tl-title">{t.title}</span>
                 <span
                   className={`tl-badge ${
-                    d.status === "active" ? "b-active" : "b-resolved"
+                    t.status === "completed" ? "b-resolved" : "b-active"
                   }`}
                 >
-                  {d.status}
+                  {t.status}
                 </span>
               </div>
 
-              <div className="tl-location">📍 {d.location}</div>
+              <div className="tl-location">
+                👤 Assigned to Volunteer ID: {t.assigned_to}
+              </div>
 
               <div className="action-buttons">
                 <button
                   className="edit-btn"
-                  onClick={() => navigate(`/edit-disaster/${d.id}`)}
+                  onClick={() => navigate(`/edit-task/${t.id}`)}
                 >
                   Edit
                 </button>
 
                 <button
                   className="delete-btn"
-                  onClick={() => handleDelete(d.id)}
+                  onClick={() => handleDelete(t.id)}
                 >
                   Delete
                 </button>
@@ -181,4 +166,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Tasks;

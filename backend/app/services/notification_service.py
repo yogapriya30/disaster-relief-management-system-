@@ -12,7 +12,7 @@ def create_notification(db: Session, notification: NotificationCreate):
     new_notification = Notification(
         message=notification.message,
         recipient=notification.recipient,
-        status=notification.status
+        user_id=notification.user_id
     )
     db.add(new_notification)
     db.commit()
@@ -25,7 +25,7 @@ def update_notification(db: Session, notification_id: int, notification_data: No
         return None
     notification.message = notification_data.message
     notification.recipient = notification_data.recipient
-    notification.status = notification_data.status
+    notification.user_id = notification_data.user_id
     db.commit()
     db.refresh(notification)
     return notification
