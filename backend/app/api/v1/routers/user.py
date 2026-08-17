@@ -11,35 +11,54 @@ from app.services.user_service import (
     authenticate_user,
 )
 from app.security.authentication import create_access_token
+
 router = APIRouter(prefix="/users", tags=["Users"])
+
+
 @router.get("/")
 def read_users(db: Session = Depends(get_db)):
     return get_users(db)
+
+
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db=db, user=user)
+
+
 @router.get("/{user_id}")
 def read_user(user_id: int, db: Session = Depends(get_db)):
     user = get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
+
 @router.put("/{user_id}")
 def update_existing_user(user_id: int, user: UserCreate, db: Session = Depends(get_db)):
     updated = update_user(db, user_id, user)
     if not updated:
         raise HTTPException(status_code=404, detail="User not found")
     return updated
+
+
 @router.delete("/{user_id}")
 def delete_existing_user(user_id: int, db: Session = Depends(get_db)):
     deleted = delete_user(db, user_id)
     if not deleted:
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": "User deleted successfully"}
+
+
 @router.post("/login", response_model=TokenResponse)
 def login(credentials: LoginRequest, db: Session = Depends(get_db)):
     user = authenticate_user(db, credentials.email, credentials.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
-    token = create_access_token({"sub": str(user.id), "email": user.email})
-    return {"access_token": token, "token_type": "bearer"}
+    token = create_access_token(
+        {"sub": str(user.id), "email": user.email, "role": user.role}
+    )
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "role": user.role,
+    }
