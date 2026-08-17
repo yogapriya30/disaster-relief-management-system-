@@ -28,14 +28,19 @@ function Login() {
         { timeout: 60000 }
       );
 
-      // Save token
+      
       localStorage.setItem("token", res.data.access_token);
 
-      // Temporary role selection for demo
-      if (email === "admintest1@gmail.com") {
-        localStorage.setItem("role", "admin");
+      
+      const userRole = res.data.role || res.data.user?.role;
+      if (userRole) {
+        localStorage.setItem("role", userRole.toLowerCase());
       } else {
-        localStorage.setItem("role", "volunteer");
+        if (email === "admintest1@gmail.com") {
+          localStorage.setItem("role", "admin");
+        } else {
+          localStorage.setItem("role", "volunteer");
+        }
       }
 
       navigate("/dashboard");

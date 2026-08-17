@@ -9,9 +9,15 @@ function Dashboard() {
   const [disasters, setDisasters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
-  const role = localStorage.getItem("role");
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole.toLowerCase());
+    }
+  }, []);
 
   const fetchDisasters = () => {
     const token = localStorage.getItem("token");
@@ -40,7 +46,7 @@ function Dashboard() {
 
   useEffect(() => {
     fetchDisasters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
   const handleLogout = () => {
