@@ -11,7 +11,7 @@ function Dashboard() {
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const fetchDisasters = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
@@ -33,11 +33,39 @@ function Dashboard() {
           navigate("/");
         }
       });
-  }, [navigate]);
+  };
+
+  useEffect(() => {
+    fetchDisasters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this disaster?"
+    );
+    if (!confirmDelete) return;
+
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`${BASE_URL}/disasters/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        setDisasters((prev) => prev.filter((d) => d.id !== id));
+      })
+      .catch(() => {
+        alert("Failed to delete disaster. Please try again.");
+      });
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/edit-disaster/${id}`);
   };
 
   const activeCount = disasters.filter((d) => d.status === "active").length;
@@ -140,6 +168,21 @@ function Dashboard() {
               </div>
               <p>{d.description}</p>
               {d.location && <p className="tl-location">📍 {d.location}</p>}
+
+              <div className="tl-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => handleEdit(d.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(d.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}

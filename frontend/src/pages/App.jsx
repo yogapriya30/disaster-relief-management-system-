@@ -22,6 +22,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-disaster" element={<AddDisaster />} />
+        <Route path="/edit-disaster/:id" element={<AddDisaster />} />
         <Route path="/add-volunteer" element={<AddVolunteer />} />
         <Route path="/volunteers" element={<Volunteers />} />
         <Route path="/relief-camps" element={<ReliefCamps />} />
