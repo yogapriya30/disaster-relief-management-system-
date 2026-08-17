@@ -12,7 +12,6 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Wake up the backend as soon as the login page loads
   useEffect(() => {
     axios.get(`${BASE_URL}/docs`).catch(() => {});
   }, []);
@@ -28,8 +27,17 @@ function Login() {
         { email, password },
         { timeout: 60000 }
       );
+
+      // Save token
       localStorage.setItem("token", res.data.access_token);
-      localStorage.setItem("role", res.data.role);
+
+      // Temporary role selection for demo
+      if (email === "admintest1@gmail.com") {
+        localStorage.setItem("role", "admin");
+      } else {
+        localStorage.setItem("role", "volunteer");
+      }
+
       navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password");
@@ -47,10 +55,14 @@ function Login() {
           <span className="logo-dot" />
           Relief<span className="logo-accent">Ops</span>
         </div>
-        <p className="login-subtitle">Sign in to manage disaster response</p>
+
+        <p className="login-subtitle">
+          Sign in to manage disaster response
+        </p>
 
         <form onSubmit={handleSubmit}>
           <label>Email</label>
+
           <input
             type="email"
             placeholder="you@example.com"
@@ -60,6 +72,7 @@ function Login() {
           />
 
           <label>Password</label>
+
           <input
             type="password"
             placeholder="••••••••"
@@ -70,7 +83,11 @@ function Login() {
 
           {error && <div className="login-error">⚠ {error}</div>}
 
-          <button type="submit" className="login-btn" disabled={loading}>
+          <button
+            type="submit"
+            className="login-btn"
+            disabled={loading}
+          >
             {loading ? "Signing in..." : "Login"}
           </button>
         </form>
