@@ -70,10 +70,18 @@ function Dashboard() {
 
   const handleResolve = (id) => {
     const token = localStorage.getItem("token");
+    const disaster = disasters.find((d) => d.id === id);
+    if (!disaster) return;
+
     axios
       .put(
         `${BASE_URL}/disasters/${id}`,
-        { status: "resolved" },
+        {
+          title: disaster.title || disaster.name,
+          description: disaster.description,
+          location: disaster.location,
+          status: "resolved",
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
