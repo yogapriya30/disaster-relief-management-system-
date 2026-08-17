@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
+
+const BASE_URL = "https://disaster-relief-management-system-bcio.onrender.com";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,14 +12,22 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Wake up the backend as soon as the login page loads,
+  // so the server is already awake by the time the user submits.
+  useEffect(() => {
+    axios.get(`${BASE_URL}/docs`).catch(() => {});
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
       const res = await axios.post(
-        "https://disaster-relief-management-system-bcio.onrender.com/users/login",
-        { email, password }
+        `${BASE_URL}/users/login`,
+        { email, password },
+        { timeout: 60000 }
       );
       localStorage.setItem("token", res.data.access_token);
       navigate("/dashboard");
