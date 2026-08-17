@@ -68,6 +68,24 @@ function Dashboard() {
     navigate(`/edit-disaster/${id}`);
   };
 
+  const handleResolve = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        `${BASE_URL}/disasters/${id}`,
+        { status: "resolved" },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then(() => {
+        setDisasters((prev) =>
+          prev.map((d) => (d.id === id ? { ...d, status: "resolved" } : d))
+        );
+      })
+      .catch(() => {
+        alert("Failed to update status. Please try again.");
+      });
+  };
+
   const activeCount = disasters.filter((d) => d.status === "active").length;
   const resolvedCount = disasters.filter((d) => d.status === "resolved").length;
   const totalCount = disasters.length;
@@ -170,10 +188,7 @@ function Dashboard() {
               {d.location && <p className="tl-location">📍 {d.location}</p>}
 
               <div className="tl-actions">
-                <button
-                  className="edit-btn"
-                  onClick={() => handleEdit(d.id)}
-                >
+                <button className="edit-btn" onClick={() => handleEdit(d.id)}>
                   Edit
                 </button>
                 <button
@@ -182,6 +197,14 @@ function Dashboard() {
                 >
                   Delete
                 </button>
+                {d.status === "active" && (
+                  <button
+                    className="resolve-btn"
+                    onClick={() => handleResolve(d.id)}
+                  >
+                    Mark Resolved
+                  </button>
+                )}
               </div>
             </div>
           </div>
