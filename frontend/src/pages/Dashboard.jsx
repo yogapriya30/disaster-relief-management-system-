@@ -11,6 +11,8 @@ function Dashboard() {
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
 
+  const role = localStorage.getItem("role");
+
   const fetchDisasters = () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -30,6 +32,7 @@ function Dashboard() {
         setLoading(false);
         if (err.response && err.response.status === 401) {
           localStorage.removeItem("token");
+          localStorage.removeItem("role");
           navigate("/");
         }
       });
@@ -42,6 +45,7 @@ function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/");
   };
 
@@ -199,12 +203,16 @@ function Dashboard() {
                 <button className="edit-btn" onClick={() => handleEdit(d.id)}>
                   Edit
                 </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(d.id)}
-                >
-                  Delete
-                </button>
+
+                {role === "admin" && (
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(d.id)}
+                  >
+                    Delete
+                  </button>
+                )}
+
                 {d.status === "active" && (
                   <button
                     className="resolve-btn"

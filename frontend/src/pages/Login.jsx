@@ -12,8 +12,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Wake up the backend as soon as the login page loads,
-  // so the server is already awake by the time the user submits.
+  // Wake up the backend as soon as the login page loads
   useEffect(() => {
     axios.get(`${BASE_URL}/docs`).catch(() => {});
   }, []);
@@ -30,6 +29,7 @@ function Login() {
         { timeout: 60000 }
       );
       localStorage.setItem("token", res.data.access_token);
+      localStorage.setItem("role", res.data.role);
       navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password");
