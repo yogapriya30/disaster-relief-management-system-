@@ -72,20 +72,18 @@ _See `/docs/diagrams/` for the full-resolution source file (`Class_Diagram.drawi
 - Filter disasters and view live metrics on the dashboard
 
 **Volunteer Management**
-- Register and manage volunteers _(backend ready, frontend UI in progress)_
+- Register,view,edit,and delete voilunteers
+- 
 
 **Relief Camp Management**
-- Manage relief camps and their capacity _(backend ready, frontend UI in progress)_
-
+-Create,view,edit,and delete reliefcamps
 **Resource Management**
-- Track resource inventory across camps _(backend ready, frontend UI in progress)_
-
+-Track and manages resources inventory(create,delete,view,edit)
 **Task Management**
-- Assign and track relief tasks _(backend ready, frontend UI in progress)_
-
+-Assign and manages relief tasks
+(create,view,delete,edit)
 **Notifications**
-- Notify volunteers/admins of key updates _(backend ready, frontend UI in progress)_
-
+-Create and manages notifications for volunteers and admin
 ---
 
 ## 📸 Screenshots
