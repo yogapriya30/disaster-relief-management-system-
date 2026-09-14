@@ -3,10 +3,17 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
 import Sidebar from "../components/Sidebar";
+import Resources from "./Resources";
+import Volunteers from "./Volunteers";
+import ReliefCamps from "./ReliefCamps";
+import Tasks from "./Tasks";
+import Notifications from "./Notifications";
 
 const BASE_URL = "https://disaster-relief-management-system-bcio.onrender.com";
 
 function Dashboard() {
+  const [activePage, setActivePage] = useState("dashboard"); // 👈 புது state
+
   const [disasters, setDisasters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
@@ -47,14 +54,7 @@ function Dashboard() {
 
   useEffect(() => {
     fetchDisasters();
-    
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    navigate("/");
-  };
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
@@ -112,10 +112,9 @@ function Dashboard() {
   const filteredDisasters =
     filter === "all" ? disasters : disasters.filter((d) => d.status === filter);
 
-  return (
-    <div className="app-layout">
-      <Sidebar />
-      <div className="dash">
+  // 👇 Dashboard home content - தனி block ஆ
+  const renderDashboardHome = () => (
+    <>
       <div className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -232,7 +231,33 @@ function Dashboard() {
           </div>
         ))}
       </div>
-      </div>
+    </>
+  );
+
+  // 👇 activePage-ஐ பொறுத்து content switch பண்றது
+  const renderContent = () => {
+    switch (activePage) {
+      case "dashboard":
+        return renderDashboardHome();
+      case "resources":
+        return <Resources />;
+      case "volunteers":
+        return <Volunteers />;
+      case "relief-camps":
+        return <ReliefCamps />;
+      case "tasks":
+        return <Tasks />;
+      case "notifications":
+        return <Notifications />;
+      default:
+        return renderDashboardHome();
+    }
+  };
+
+  return (
+    <div className="app-layout">
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      <div className="dash">{renderContent()}</div>
     </div>
   );
 }
