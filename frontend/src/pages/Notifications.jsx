@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Notifications.css";
+import Sidebar from "../components/Sidebar";
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -38,7 +39,9 @@ function Notifications() {
   };
 
   return (
-    <div className="dash">
+    <div className="app-layout">
+      <Sidebar />
+      <div className="dash">
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -51,10 +54,6 @@ function Notifications() {
             onClick={() => navigate("/add-notification")}
           >
             + Add Notification
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout ↗
           </button>
         </div>
       </header>
@@ -115,6 +114,7 @@ function Notifications() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
+      </div>
     </div>
   );
 }

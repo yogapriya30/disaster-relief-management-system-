@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
+import Sidebar from "../components/Sidebar";
 
 const BASE_URL = "https://disaster-relief-management-system-bcio.onrender.com";
 
@@ -112,7 +113,9 @@ function Dashboard() {
     filter === "all" ? disasters : disasters.filter((d) => d.status === filter);
 
   return (
-    <div className="dash">
+    <div className="app-layout">
+      <Sidebar />
+      <div className="dash">
       <div className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -122,9 +125,6 @@ function Dashboard() {
           <Link to="/add-disaster">
             <button className="add-disaster-btn">+ Add Disaster</button>
           </Link>
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout
-          </button>
         </div>
       </div>
 
@@ -231,6 +231,7 @@ function Dashboard() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

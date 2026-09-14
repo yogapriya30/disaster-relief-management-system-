@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Tasks.css";
+import Sidebar from "../components/Sidebar";
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -45,7 +46,9 @@ function Tasks() {
     filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
 
   return (
-    <div className="dash">
+    <div className="app-layout">
+      <Sidebar />
+      <div className="dash">
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -58,10 +61,6 @@ function Tasks() {
             onClick={() => navigate("/add-task")}
           >
             + Add Task
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout ↗
           </button>
         </div>
       </header>
@@ -162,6 +161,7 @@ function Tasks() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
+      </div>
     </div>
   );
 }

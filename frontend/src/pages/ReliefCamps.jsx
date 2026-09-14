@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ReliefCamps.css";
+import Sidebar from "../components/Sidebar";
 
 function ReliefCamps() {
   const [camps, setCamps] = useState([]);
@@ -40,7 +41,9 @@ function ReliefCamps() {
   const totalCapacity = camps.reduce((sum, c) => sum + (c.capacity || 0), 0);
 
   return (
-    <div className="dash">
+    <div className="app-layout">
+      <Sidebar />
+      <div className="dash">
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -53,10 +56,6 @@ function ReliefCamps() {
             onClick={() => navigate("/add-relief-camp")}
           >
             + Add Relief Camp
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout ↗
           </button>
         </div>
       </header>
@@ -125,6 +124,7 @@ function ReliefCamps() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
+      </div>
     </div>
   );
 }

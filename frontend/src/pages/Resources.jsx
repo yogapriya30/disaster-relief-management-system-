@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Resources.css";
+import Sidebar from "../components/Sidebar";
 
 function Resources() {
   const [resources, setResources] = useState([]);
@@ -43,7 +44,9 @@ function Resources() {
   );
 
   return (
-    <div className="dash">
+    <div className="app-layout">
+      <Sidebar />
+      <div className="dash">
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -56,10 +59,6 @@ function Resources() {
             onClick={() => navigate("/add-resource")}
           >
             + Add Resource
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout ↗
           </button>
         </div>
       </header>
@@ -130,6 +129,7 @@ function Resources() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
+      </div>
     </div>
   );
 }

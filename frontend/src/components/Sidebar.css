@@ -1,0 +1,137 @@
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  min-height: 100vh;
+  background: #0b1120;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+.sidebar-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 24px;
+}
+
+.sidebar-logo .logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+}
+
+.sidebar-logo .logo-accent { color: #22d3ee; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.sidebar-link:hover {
+  background: #111827;
+  color: #e2e8f0;
+}
+
+.sidebar-link-active {
+  background: #111827;
+  color: #22d3ee;
+  box-shadow: 0 0 0 1px #1e293b inset;
+}
+
+.sidebar-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #334155;
+  color: #f87171;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.sidebar-logout:hover {
+  background: #7f1d1d;
+  color: #fecaca;
+  border-color: #7f1d1d;
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #0b1120;
+}
+
+.app-layout > .dash {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mobile: sidebar becomes a top bar */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    min-height: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    position: static;
+    overflow-x: auto;
+  }
+
+  .sidebar-logo { padding: 0 12px 0 0; }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex: none;
+  }
+
+  .sidebar-link { padding: 8px 10px; }
+
+  .sidebar-text { display: none; }
+
+  .sidebar-logout {
+    margin-top: 0;
+    margin-left: 8px;
+  }
+}
