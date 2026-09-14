@@ -1,17 +1,17 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
-const NAV_ITEMS = [
-  { to: "/dashboard", label: "Dashboard", icon: "🏠" },
-  { to: "/volunteers", label: "Volunteers", icon: "👥" },
-  { to: "/resources", label: "Resources", icon: "📦" },
-  { to: "/relief-camps", label: "Relief Camps", icon: "🏕" },
-  { to: "/tasks", label: "Tasks", icon: "📋" },
-  { to: "/notifications", label: "Notifications", icon: "🔔" },
-];
-
-function Sidebar() {
+function Sidebar({ activePage, setActivePage }) {
   const navigate = useNavigate();
+
+  const menuItems = [
+    { key: "dashboard", label: "🏠 Dashboard" },
+    { key: "resources", label: "📦 Resources" },
+    { key: "volunteers", label: "👥 Volunteers" },
+    { key: "relief-camps", label: "🏕 Relief Camps" },
+    { key: "tasks", label: "📋 Tasks" },
+    { key: "notifications", label: "🔔 Notifications" },
+  ];
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -20,34 +20,21 @@ function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-logo">
-        <span className="logo-dot" />
-        <span>
-          Relief<span className="logo-accent">Ops</span>
-        </span>
-      </div>
-
-      <nav className="sidebar-nav">
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              "sidebar-link" + (isActive ? " sidebar-link-active" : "")
-            }
-          >
-            <span className="sidebar-icon">{item.icon}</span>
-            <span className="sidebar-text">{item.label}</span>
-          </NavLink>
-        ))}
-      </nav>
-
-      <button className="sidebar-logout" onClick={handleLogout}>
-        <span className="sidebar-icon">🚪</span>
-        <span className="sidebar-text">Logout</span>
+    <div className="sidebar">
+      <h2 className="sidebar-title">Relief Admin</h2>
+      {menuItems.map((item) => (
+        <button
+          key={item.key}
+          className={`sidebar-link ${activePage === item.key ? "active" : ""}`}
+          onClick={() => setActivePage(item.key)}
+        >
+          {item.label}
+        </button>
+      ))}
+      <button className="sidebar-link logout-btn" onClick={handleLogout}>
+        🚪 Logout
       </button>
-    </aside>
+    </div>
   );
 }
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Volunteers.css";
-import Sidebar from "../components/Sidebar";
 
 const getIcon = (skill = "") => {
   const s = skill.toLowerCase();
@@ -36,11 +35,6 @@ function Volunteers() {
       .catch((err) => console.log(err));
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   const handleDelete = (id) => {
     if (!window.confirm("Delete this volunteer?")) return;
     axios
@@ -65,9 +59,7 @@ function Volunteers() {
       : volunteers.filter((v) => v.availability === filter);
 
   return (
-    <div className="app-layout">
-      <Sidebar />
-      <div className="dash">
+    <>
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -184,8 +176,7 @@ function Volunteers() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
-      </div>
-    </div>
+    </>
   );
 }
 

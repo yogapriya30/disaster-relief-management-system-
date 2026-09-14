@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Tasks.css";
-import Sidebar from "../components/Sidebar";
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -24,11 +23,6 @@ function Tasks() {
       .catch((err) => console.log(err));
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   const handleDelete = (id) => {
     if (!window.confirm("Delete this task?")) return;
     axios
@@ -46,9 +40,7 @@ function Tasks() {
     filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
 
   return (
-    <div className="app-layout">
-      <Sidebar />
-      <div className="dash">
+    <>
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -161,8 +153,7 @@ function Tasks() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ReliefCamps.css";
-import Sidebar from "../components/Sidebar";
 
 function ReliefCamps() {
   const [camps, setCamps] = useState([]);
@@ -23,11 +22,6 @@ function ReliefCamps() {
       .catch((err) => console.log(err));
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   const handleDelete = (id) => {
     if (!window.confirm("Delete this relief camp?")) return;
     axios
@@ -41,9 +35,7 @@ function ReliefCamps() {
   const totalCapacity = camps.reduce((sum, c) => sum + (c.capacity || 0), 0);
 
   return (
-    <div className="app-layout">
-      <Sidebar />
-      <div className="dash">
+    <>
       <header className="dash-nav">
         <div className="dash-logo">
           <span className="logo-dot" />
@@ -124,8 +116,7 @@ function ReliefCamps() {
           <div className="empty">Nothing to show here right now.</div>
         )}
       </section>
-      </div>
-    </div>
+    </>
   );
 }
 
