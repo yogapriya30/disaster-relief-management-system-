@@ -28,10 +28,8 @@ function Login() {
         { timeout: 60000 }
       );
 
-      
       localStorage.setItem("token", res.data.access_token);
 
-      
       const userRole = res.data.role || res.data.user?.role;
       if (userRole) {
         localStorage.setItem("role", userRole.toLowerCase());
@@ -54,6 +52,7 @@ function Login() {
   return (
     <div className="login-wrapper">
       <div className="login-bg-glow" />
+      <div className="login-bg-glow-2" />
 
       <div className="login-card">
         <div className="login-brand">
@@ -67,24 +66,28 @@ function Login() {
 
         <form onSubmit={handleSubmit}>
           <label>Email</label>
-
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className="input-group">
+            <span className="input-icon">📧</span>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
           <label>Password</label>
-
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="input-group">
+            <span className="input-icon">🔒</span>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
           {error && <div className="login-error">⚠ {error}</div>}
 
