@@ -10,8 +10,7 @@
   justify-content: center;
   background:
     linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
-    url('https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=1920&auto=format&fit=crop') !important;
-
+url('https://images.pexels.com/photos/6591162/pexels-photo-6591162.jpeg?auto=compress&cs=tinysrgb&w=1920') !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
