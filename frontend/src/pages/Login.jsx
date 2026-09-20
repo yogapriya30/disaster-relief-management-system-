@@ -51,18 +51,16 @@ function Login() {
 
   return (
     <div className="login-wrapper">
-      <div className="login-bg-glow" />
-      <div className="login-bg-glow-2" />
+      <div className="login-bg-glow"></div>
+      <div className="login-bg-glow-2"></div>
 
       <div className="login-card">
         <div className="login-brand">
-          <span className="logo-dot" />
+          <span className="logo-dot"></span>
           Relief<span className="logo-accent">Ops</span>
         </div>
 
-        <p className="login-subtitle">
-          Sign in to manage disaster response
-        </p>
+        <p className="login-subtitle">Sign in to manage disaster response</p>
 
         <form onSubmit={handleSubmit}>
           <label>Email</label>
@@ -91,11 +89,7 @@ function Login() {
 
           {error && <div className="login-error">⚠ {error}</div>}
 
-          <button
-            type="submit"
-            className="login-btn"
-            disabled={loading}
-          >
+          <button type="submit" className="login-btn" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
           </button>
         </form>
