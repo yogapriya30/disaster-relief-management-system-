@@ -8,6 +8,7 @@ const BASE_URL = "https://disaster-relief-management-system-bcio.onrender.com";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -51,9 +52,6 @@ function Login() {
 
   return (
     <div className="login-wrapper">
-      <div className="login-bg-glow"></div>
-      <div className="login-bg-glow-2"></div>
-
       <div className="login-card">
         <div className="login-brand">
           <span className="logo-dot"></span>
@@ -79,12 +77,18 @@ function Login() {
           <div className="input-group">
             <span className="input-icon">🔒</span>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
           </div>
 
           {error && <div className="login-error">⚠ {error}</div>}
